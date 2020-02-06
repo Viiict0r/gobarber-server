@@ -24,6 +24,15 @@ class User extends Model {
 
     return this;
   }
+
+  /**
+   * Compare the informed password with user saved password
+   * @param {String} password - User password
+   * @return {Boolean} - true or false
+   */
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
+  }
 }
 
 export default User;
