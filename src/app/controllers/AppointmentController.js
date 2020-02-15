@@ -62,6 +62,13 @@ class AppointmentController {
         .json({ error: 'Você só pode criar agendamentos com fornecedores!' });
     }
 
+    /** Check if user is provider_id informed */
+    if (provider_id === req.userId) {
+      return res
+        .status(401)
+        .json({ error: 'Você não pode criar agendamentos com você mesmo!' });
+    }
+
     const hourStart = startOfHour(parseISO(date));
 
     if (isBefore(hourStart, new Date())) {
